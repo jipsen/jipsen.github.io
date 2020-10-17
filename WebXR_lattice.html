@@ -61,6 +61,7 @@
         	var sphere3 = BABYLON.Mesh.CreateSphere("sphere3", 1, 1, scene);
         	var sphere4 = BABYLON.Mesh.CreateSphere("sphere4", 1, 1, scene);
         	var sphere5 = BABYLON.Mesh.CreateSphere("sphere5", 1, 1, scene);
+        	var sphere6 = BABYLON.Mesh.CreateSphere("sphere5", 1, 1, scene);
                 
         	//Creation of a cylinder
         	//(name, height, diameter, tessellation, scene, updatable)
@@ -81,11 +82,11 @@
         
         	// Moving elements
         	sphere1.position = new BABYLON.Vector3(0, 0, 0);
-        	sphere1.position = new BABYLON.Vector3(1, 0, 1);
-        	sphere1.position = new BABYLON.Vector3(-1, 0, 1);
-        	sphere1.position = new BABYLON.Vector3(0, 1, 1);
-        	sphere1.position = new BABYLON.Vector3(0, -1, 1);
-        	sphere1.position = new BABYLON.Vector3(0, 0, 2);
+        	sphere2.position = new BABYLON.Vector3(1, 0, 1);
+        	sphere3.position = new BABYLON.Vector3(-1, 0, 1);
+        	sphere4.position = new BABYLON.Vector3(0, 1, 1);
+        	sphere5.position = new BABYLON.Vector3(0, -1, 1);
+        	sphere6.position = new BABYLON.Vector3(0, 0, 2);
         	cylinder.position.z = -1;
 
             // Create simple sphere
