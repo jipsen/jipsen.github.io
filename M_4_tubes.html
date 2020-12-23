@@ -82,17 +82,17 @@
 
         // Create simple sphere
 
-        var sphere = BABYLON.Mesh.CreateIcoSphere("sphere", {radius:0.2, flat:true, subdivisions: 1}, scene);
+        //var sphere = BABYLON.Mesh.CreateIcoSphere("sphere", {radius:0.2, flat:true, subdivisions: 1}, scene);
 
-        sphere.position.y = 3;
+        //sphere.position.y = 3;
 
-        sphere.material = new BABYLON.StandardMaterial("sphere material",scene)
+        //sphere.material = new BABYLON.StandardMaterial("sphere material",scene)
 
 
-        var box = BABYLON.Mesh.CreateBox("box", .6, scene);
-        box.position.y = 3;
-        box.position.x = 2;
-        box.material = new BABYLON.StandardMaterial("box material",scene)
+        //var box = BABYLON.Mesh.CreateBox("box", .6, scene);
+        //box.position.y = 3;
+        //box.position.x = 2;
+        //box.material = new BABYLON.StandardMaterial("box material",scene)
 
         //box.position = new BABYLON.Vector3(2, 3, 0);   // Using a vector
 
@@ -124,22 +124,6 @@
         sphere4.position = new BABYLON.Vector3(0, 1, 1);
         sphere5.position = new BABYLON.Vector3(0, -1, 1);
         sphere6.position = new BABYLON.Vector3(0, 0, 2);
-        
-        // Creation of a lines mesh
-        var lines = BABYLON.Mesh.CreateLines("lines", [
-            /*
-            new BABYLON.Vector3(0, 0, 0),
-            new BABYLON.Vector3(1, 0, 1),
-            new BABYLON.Vector3(0, 0, 2),
-            new BABYLON.Vector3(-1, 0, 1),
-            new BABYLON.Vector3(0, 0, 0),
-            new BABYLON.Vector3(0, 1, 1),
-            new BABYLON.Vector3(0, 0, 2),
-            new BABYLON.Vector3(0, -1, 1),
-            new BABYLON.Vector3(0, 0, 0),
-            new BABYLON.Vector3(0, 1, 1),
-            */
-        ], scene);
         
         //Array of paths to construct tube
         var myPath = [
@@ -185,10 +169,6 @@
         vertexData.applyToMesh(customMesh);
         
         customMesh.material = new BABYLON.StandardMaterial("custom",scene);
-        //customMesh.rotation = new BABYLON.Vector3(1, 1, 1);
-        //customMesh.position = new Vector3(2, 3, 4);//(2, 3, 4)
-        //customMesh.position.addInPlace(new Vector3(2, 3, 4)); //(-1 + 2, 2 + 3, 1 + 4) = (1, 5, 5)
-        //customMesh.translate(new BABYLON.Vector3(2, 3, 4), 1, BABYLON.Space.WORLD); //(-1 + 2, 2 + 3, 1 + 4) = (1, 5, 5)
 
         scene.onBeforeRenderObservable.add(()=>{
             customMesh.rotation.y += 0.0001*scene.getEngine().getDeltaTime();
