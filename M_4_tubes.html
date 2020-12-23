@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html>
-    <script type="text/javascript" src="posets.js"></script>
+    <!--script type="text/javascript" src="posets.js"></script-->
 
     <head>
 
@@ -60,11 +60,11 @@
     <canvas id="c0" width="150" height="150"></canvas>
     <canvas id="c1" width="150" height="150"></canvas>
 
-    <script>
-    drawPosets([{0: []},
-    {0: [1], 1: []},
-    ]) 
-    </script>
+    <!--script>
+    //drawPosets([{0: []},
+    //{0: [1], 1: []},
+    //]) 
+    </script-->
     <script>
 
         var canvas = document.getElementById("renderCanvas");
@@ -186,7 +186,7 @@
         var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
         shadowGenerator.useBlurExponentialShadowMap = true;
         shadowGenerator.blurKernel = 32;
-        shadowGenerator.addShadowCaster(sphere, true);
+        //shadowGenerator.addShadowCaster(sphere, true);
 
 
 
@@ -198,13 +198,13 @@
 
         // Runs every frame to rotate the sphere
 
-        scene.onBeforeRenderObservable.add(()=>{
+        //scene.onBeforeRenderObservable.add(()=>{
 
-            sphere.rotation.y += 0.0001*scene.getEngine().getDeltaTime();
+        //    sphere.rotation.y += 0.0001*scene.getEngine().getDeltaTime();
 
-            sphere.rotation.x += 0.0001*scene.getEngine().getDeltaTime();
+        //    sphere.rotation.x += 0.0001*scene.getEngine().getDeltaTime();
 
-        })
+        //})
 
 
 
@@ -234,30 +234,30 @@
 
         panel.addControl(header); 
 
-        var picker = new BABYLON.GUI.ColorPicker();
+        //var picker = new BABYLON.GUI.ColorPicker();
 
-        picker.value = sphere.material.diffuseColor;
+        //picker.value = sphere.material.diffuseColor;
 
-        picker.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+        //picker.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
 
-        picker.height = "350px";
+        //picker.height = "350px";
 
-        picker.width = "350px";
+        //picker.width = "350px";
 
 
         //To change colors of the objects
-        picker.onValueChangedObservable.add(function(value) {
+        //picker.onValueChangedObservable.add(function(value) {
 
-            sphere.material.diffuseColor.copyFrom(value); // the sphere
-            box.material.diffuseColor.copyFrom(value); // the box
+        //    sphere.material.diffuseColor.copyFrom(value); // the sphere
+        //    box.material.diffuseColor.copyFrom(value); // the box
 
             // the lattice
-            sphere1.material.diffuseColor.copyFrom(value);
-            sphere2.material.diffuseColor.copyFrom(value);
-            sphere3.material.diffuseColor.copyFrom(value);
-            sphere4.material.diffuseColor.copyFrom(value);
-            sphere5.material.diffuseColor.copyFrom(value);
-            sphere6.material.diffuseColor.copyFrom(value);
+            //sphere1.material.diffuseColor.copyFrom(value);
+            //sphere2.material.diffuseColor.copyFrom(value);
+            //sphere3.material.diffuseColor.copyFrom(value);
+            //sphere4.material.diffuseColor.copyFrom(value);
+            //sphere5.material.diffuseColor.copyFrom(value);
+            //sphere6.material.diffuseColor.copyFrom(value);
             
 
 
@@ -265,7 +265,7 @@
 
         });
 
-        panel.addControl(picker);
+        //panel.addControl(picker);
 
 
 
