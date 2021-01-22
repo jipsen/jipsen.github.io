@@ -40,7 +40,8 @@
                 for(i in L.ucov){
                     for(k in L.ucov[i]){
                         j = L.ucov[i][k];
-                        myPath = [ new BABYLON.Vector3(L.posi[i][0], L.posi[i][1], L.posi[i][2]) , new BABYLON.Vector3(L.posi[j][0], L.posi[j][1], L.posi[j][2])];
+                        myPath = [new BABYLON.Vector3(L.posi[i][0]+ipos[0], L.posi[i][1]+ipos[1], L.posi[i][2]+ipos[2]) , 
+                                  new BABYLON.Vector3(L.posi[j][0]+ipos[0], L.posi[j][1]+ipos[1], L.posi[j][2]+ipos[2])];
                         console.log(L.posi[i],L.posi[j]);
                         tube = BABYLON.MeshBuilder.CreateTube("tube", {path: myPath, radius: 0.01, sideOrientation: BABYLON.Mesh.DOUBLESIDE, updatable: true}, scene);
                         meshArray.push(tube);
@@ -72,8 +73,8 @@
             scene.activeCamera.beta += 0.8;
             
             //Lattice2Babylon(M4);
-            var M = Lattice2Babylon(M4,[0,2,0],scene);
-            //var M1 = Lattice2Babylon(M1,[0,2,0],scene);
+            var M = Lattice2Babylon(M4,[0,0,0],scene);
+            var L = Lattice2Babylon(M1,[0,3,0],scene);
             //Lattice2Babylon(L);
 
             // Default Environment
