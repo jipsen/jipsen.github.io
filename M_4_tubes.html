@@ -25,14 +25,14 @@
 <body>
     <canvas id="renderCanvas"></canvas>
     <script>
-            Lattice2Babylon = function(L,initial_pos,scene) {
+            Lattice2Babylon = function(L,ipos,scene) {
                 var myPath;
                 var tube;
                 var j;
                 var meshArray =[];
                 for (i in L.posi){
                     var sphere = BABYLON.Mesh.CreateSphere("sphere", 10, .1, scene); 
-                    sphere.position = new BABYLON.Vector3(L.posi[i][0]+inital_pos[0], L.posi[i][1]+inital_pos[1], L.posi[i][2]+inital_pos[2]); 
+                    sphere.position = new BABYLON.Vector3(L.posi[i][0]+ipos[0], L.posi[i][1]+ipos[1], L.posi[i][2]+ipos[2]); 
                     sphere.material = new BABYLON.StandardMaterial("sphere material",scene);
                     meshArray.push(sphere);
                 }
