@@ -72,8 +72,8 @@
             scene.activeCamera.beta += 0.8;
             
             //Lattice2Babylon(M4);
-            var M4 = Lattice2Babylon(M4,[0,0,0],scene);
-            var M1 = Lattice2Babylon(M1,[0,2,0],scene);
+            var M = Lattice2Babylon(M4,[0,0,0],scene);
+            //var M1 = Lattice2Babylon(M1,[0,2,0],scene);
             //Lattice2Babylon(L);
 
             // Default Environment
@@ -93,7 +93,7 @@
             // Runs every frame to rotate the sphere
             scene.onBeforeRenderObservable.add(()=>{
                //M.rotation.x += 0.0001*scene.getEngine().getDeltaTime();
-               M4.rotation.z += 0.0005*scene.getEngine().getDeltaTime();
+               M.rotation.z += 0.0005*scene.getEngine().getDeltaTime();
             })
 
             return scene;
