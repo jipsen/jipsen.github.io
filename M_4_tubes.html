@@ -25,14 +25,14 @@
 <body>
     <canvas id="renderCanvas"></canvas>
     <script>
-            Lattice2Babylon = function(L,scene) {
+            Lattice2Babylon = function(L,initial_pos,scene) {
                 var myPath;
                 var tube;
                 var j;
                 var meshArray =[];
                 for (i in L.posi){
                     var sphere = BABYLON.Mesh.CreateSphere("sphere", 10, .1, scene); 
-                    sphere.position = new BABYLON.Vector3(L.posi[i][0], L.posi[i][1], L.posi[i][2]); 
+                    sphere.position = new BABYLON.Vector3(L.posi[i][0]+inital_pos[0], L.posi[i][1]+inital_pos[1], L.posi[i][2]+inital_pos[2]); 
                     sphere.material = new BABYLON.StandardMaterial("sphere material",scene);
                     meshArray.push(sphere);
                 }
@@ -55,8 +55,8 @@
                 //"ecol": {0:{1:red,2:red,3:0,4:0}, 1:{5:0}, 2:{5:0}, 3:{5:0}, 4:{5:0},5:{}},
                 ucov: {0:[1,2,3,4], 1:[5], 2:[5], 3:[5], 4:[5],5:[]}} //upper covers
             
-            L = {posi: {0:[-2,0,0], 1:[2,0,0]},
-                ucov: {0:[1], 1:[]}} //upper covers
+            M1 = {posi: {0:[0,0,0], 1:[0,0,1], 2:[0,0,2]},
+                ucov: {0:[1], 1:[2], 2:[]}} //upper covers
         var canvas = document.getElementById("renderCanvas");
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
         var createScene = function() {
@@ -72,7 +72,8 @@
             scene.activeCamera.beta += 0.8;
             
             //Lattice2Babylon(M4);
-            var M = Lattice2Babylon(M4,scene);
+            var M4 = Lattice2Babylon(M4,[0,0,0],scene);
+            var M1 = Lattice2Babylon(M1,[0,2,0],scene);
             //Lattice2Babylon(L);
 
             // Default Environment
