@@ -93,7 +93,7 @@
             // Runs every frame to rotate the sphere
             scene.onBeforeRenderObservable.add(()=>{
                //M.rotation.x += 0.0001*scene.getEngine().getDeltaTime();
-               M.rotation.y += 0.0005*scene.getEngine().getDeltaTime();
+               M.rotation.z += 0.0005*scene.getEngine().getDeltaTime();
             })
 
             return scene;
