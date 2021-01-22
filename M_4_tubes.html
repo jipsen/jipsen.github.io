@@ -25,21 +25,7 @@
 <body>
     <canvas id="renderCanvas"></canvas>
     <script>
-        var canvas = document.getElementById("renderCanvas");
-        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
-        var createScene = function() {
-           
-            // Create scene
-            var scene = new BABYLON.Scene(engine);
-
-            var light = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(0, -0.5, 1.0), scene);
-            light.position = new BABYLON.Vector3(0, 5, -2);
-
-            var camera = new BABYLON.ArcRotateCamera("camera1",  0, 0, 20, new BABYLON.Vector3(0, 0, 1), scene);
-            camera.attachControl(canvas, true);
-            scene.activeCamera.beta += 0.8;
-            
-            Lattice2Babylon = function(L) {
+            Lattice2Babylon = function(L,scene) {
                 var myPath;
                 var tube;
                 var j;
@@ -71,9 +57,22 @@
             
             L = {posi: {0:[-2,0,0], 1:[2,0,0]},
                 ucov: {0:[1], 1:[]}} //upper covers
+        var canvas = document.getElementById("renderCanvas");
+        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
+        var createScene = function() {
+           
+            // Create scene
+            var scene = new BABYLON.Scene(engine);
+
+            var light = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(0, -0.5, 1.0), scene);
+            light.position = new BABYLON.Vector3(0, 5, -2);
+
+            var camera = new BABYLON.ArcRotateCamera("camera1",  0, 0, 20, new BABYLON.Vector3(0, 0, 1), scene);
+            camera.attachControl(canvas, true);
+            scene.activeCamera.beta += 0.8;
             
             //Lattice2Babylon(M4);
-            var M = Lattice2Babylon(M4);
+            var M = Lattice2Babylon(M4,scene);
             //Lattice2Babylon(L);
 
             // Default Environment
