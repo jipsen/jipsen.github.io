@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html>
+    <!--script type="text/javascript" src="posets.js"></script> 
+    <script type="text/javascript" src="code.js"></script--> 
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>VR objects</title>
+        <script src="https://preview.babylonjs.com/babylon.js"></script>
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            #renderCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+        </style>
+    </head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script>
+            Lattice2Babylon = function(L,ipos,scene) {
+                var myPath;
+                var tube;
+                var j;
+                var meshArray =[];
+                for (i in L.posi){
+                    var sphere = BABYLON.Mesh.CreateSphere("sphere", 10, .1, scene); 
+                    sphere.position = new BABYLON.Vector3(L.posi[i][0]+ipos[0], L.posi[i][1]+ipos[1], L.posi[i][2]+ipos[2]); 
+                    sphere.material = new BABYLON.StandardMaterial("sphere material",scene);
+                    meshArray.push(sphere);
+                }
+              
+                for(i in L.ucov){
+                    for(k in L.ucov[i]){
+                        j = L.ucov[i][k];
+                        myPath = [new BABYLON.Vector3(L.posi[i][0]+ipos[0], L.posi[i][1]+ipos[1], L.posi[i][2]+ipos[2]) , 
+                                  new BABYLON.Vector3(L.posi[j][0]+ipos[0], L.posi[j][1]+ipos[1], L.posi[j][2]+ipos[2])];
+                        console.log(L.posi[i],L.posi[j]);
+                        tube = BABYLON.MeshBuilder.CreateTube("tube", {path: myPath, radius: 0.01, sideOrientation: BABYLON.Mesh.DOUBLESIDE, updatable: true}, scene);
+                        meshArray.push(tube);
+                    }
+                }
+                return BABYLON.Mesh.MergeMeshes(meshArray);
+            }
+
+            //some lattices
+      HCube = {posi: {0:[0,0,0], 1:[1,0,0], 2:[0,1,0], 3:[0,0,1], 4:[1,1,0], 5:[1,0,1], 6:[0,1,1], 7:[1,1,1],
+		      8:[0.577,0.577,0.577], 9:[1.577,0.577,0.577],10:[0.577,1.577,0.577],11:[0.577,0.577,1.577],
+		      12:[1.577,1.577,0.577],13:[1.577,0.577,1.577],14:[0.577,1.577,1.577],15:[1.577,1.577,1.577]},
+               ucov: {0:[1,2,3,8], 1:[4,5,9], 2:[4,6,10], 3:[5,6,11], 4:[7,12],5:[7,13],6:[7,14],7:[15],
+		      8:[9,10,11],9:[12,13],10:[12,14],11:[13,14],12:[15],13:[15],14:[15],15:[]}} //upper covers
+            
+            M1 = {posi: {0:[0,0,0], 1:[0,0,1], 2:[0,0,2]},
+                //"vcol": {0:red,...,5:blue},
+                //"ecol": {0:{1:red,2:red,3:0,4:0}, 1:{5:0}, 2:{5:0}, 3:{5:0}, 4:{5:0},5:{}},
+                ucov: {0:[1], 1:[2], 2:[]}} //upper covers
+        var canvas = document.getElementById("renderCanvas");
+        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
+        var createScene = function() {
+           
+            // Create scene
+            var scene = new BABYLON.Scene(engine);
+
+            var light = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(0, -0.5, 1.0), scene);
+            light.position = new BABYLON.Vector3(0, 5, -2);
+
+            var camera = new BABYLON.ArcRotateCamera("camera1",  0, 0, 20, new BABYLON.Vector3(0, 0, 1), scene);
+            camera.attachControl(canvas, true);
+            scene.activeCamera.beta += 0.8;
+            
+            //Lattice2Babylon(M4);
+            var M = Lattice2Babylon(HCube,[0,0,0],scene);
+            //var L = Lattice2Babylon(M1,[0,3,0],scene);
+            //Lattice2Babylon(L);
+
+            // Default Environment
+            var environment = scene.createDefaultEnvironment({ enableGroundShadow: true, groundYBias: 1 });
+            environment.setMainColor(BABYLON.Color3.FromHexString("#74b9ff"))
+
+            // Shadows
+            var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
+            shadowGenerator.useBlurExponentialShadowMap = true;
+            shadowGenerator.blurKernel = 32;
+            //shadowGenerator.addShadowCaster(sphere, true);
+
+            // Enable VR
+            var vrHelper = scene.createDefaultVRExperience({createDeviceOrientationCamera:false});
+            vrHelper.enableTeleportation({floorMeshes: [environment.ground]});
+            
+            // Runs every frame to rotate the sphere
+            scene.onBeforeRenderObservable.add(()=>{
+               //M.rotation.x += 0.0001*scene.getEngine().getDeltaTime();
+               //M.rotation.z += 0.0005*scene.getEngine().getDeltaTime();
+            })
+
+            return scene;
+        };
+
+        var engine = createDefaultEngine();
+
+        if (!engine) throw 'engine should not be null.';
+        scene = createScene();;
+        var sceneToRender = scene
+
+        engine.runRenderLoop(function () {
+            if (sceneToRender && sceneToRender.activeCamera) {
+                sceneToRender.render();
+            }
+        });
+
+        // Resize
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+    </script>
+</body>
+</html>
