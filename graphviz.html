@@ -4,14 +4,15 @@
   <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   <py-env>
     - graphviz
-    - IPython
+    - networkx
   </py-env>
 </head>
 <body>
   <h3>Using graphviz in py-script</h3>
 <py-script>
+import networkx as nx
 from graphviz import Graph
-from IPython.display import display_html
+#from IPython.display import display_html
 def diagram(g):
   P = Graph(engine='neato')
   P.attr('node', shape='circle', width='.15', height='.15', fixedsize='true', fontsize='10')
@@ -27,10 +28,13 @@ def showg(li): #display a list of undirected graphs
     st+=diagram(x)._repr_svg_()+"&nbsp; &nbsp; &nbsp; &nbsp; "
   display_html(st,raw=True)
 
-showg([
-  [[1,2],[0,2],[0,1]],
-  [[1,2],[0],[0]]
-  ])
+G = nx.complete_graph(5)
+nx.draw(G)
+
+#showg([
+#  [[1,2],[0,2],[0,1]],
+#  [[1,2],[0],[0]]
+#  ])
 </py-script>
 </body>
 </html>
