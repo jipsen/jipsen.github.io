@@ -1,8 +1,12 @@
-<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-<py-env>
-  - graphviz
-</py-env>
+<html>
+<head>
+  <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+  <py-env>
+    - graphviz
+  </py-env>
+</head>
+<body>
 <py-script>
 from graphviz import Graph
 from IPython.display import display_html
@@ -26,3 +30,5 @@ showg([
   [[1,2],[0],[0]]
   ])
 </py-script>
+</body>
+</html>
