@@ -1,0 +1,87 @@
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+<py-script>
+# n-ary Boolean functions and relation are coded by 01-strings of length 2^n
+# n-ary signa are coded by +- strings of length n
+# n is minimal with respect to removing inessential arguments
+# arguments are permuted to produce lex-minimal representatives
+from itertools import product
+
+def flip(B):#Input: list or tuple of 01-strings, i.e. a Boolean matrix
+  #Output: list of integers that represent the transpose
+  return [int("".join(v[i] for v in B),2) for i in range(len(B[0]))]
+
+def comp(f,B): # f is a 01-string of length 2^n, B is a length n list of 01-strings
+  return "".join([f[x] for x in flip(B)])
+
+def apply(f,ps,ns,P0,P1,N0,N1,info=False): # f a function (01-string) with signum s='++...--...'
+  # P0, N0 already closed under f, and P1, N1 new tuples
+  # return new P,P2 where P0 is P0+P1, P2 is new f+'s
+  P = P0+P1
+  Ps = set(P)
+  P2 = []
+  N = N0+N1
+  for i in range(ps):
+    Pi = product(*(i*[P0]+[P1]+(ps-i-1)*[P])) 
+    for B in Pi:
+      if ns==0:
+        g = comp(f,B)
+        if g not in Ps:
+          Ps.add(g)
+          P2.append(g)
+          if info==2: print(g,B)
+      else:
+        for i in range(ns):
+          Ni = product(*(i*[N0]+[N1]+(ns-i-1)*[N]))
+          for C in Ni:
+            g = comp(f,B+C)
+            if g not in Ps:
+              Ps.add(g)
+              P2.append(g)
+              if info==2: print(g,B+C)
+  return (P,P2)
+
+def genPrcl(f,ps,ns,info=False): # f a 01-string of length 2^n, ps+ns = n
+  n = ps+ns
+  bstr = [bin(i)[2:] for i in range(2**n)]
+  bstr = [(n-len(st))*"0"+st for st in bstr]
+  xs = ["".join(v[i] for v in bstr) for i in range(n)]
+  P0 = []
+  P1 = xs[:ps]+[f]
+  N0 = []
+  N1 = xs[ps:]
+  i = 0
+  while True:
+    (P0,P1) = apply(f,ps,ns,P0,P1,N0,N1,info)
+    if P1+N1==[]: break
+    (N0,N1) = apply(f,ps,ns,N0,N1,P0,P1,info)
+    if P1+N1==[]: break
+    i += 1
+    if info: print(i,len(P0),len(N0),len(P1),len(N1))
+  if info: print(len(P0),len(N0))
+  return (P0,N0)
+
+# h = "00000ab01cd11111" where abcd are given below
+h=[
+"0000000010011111", # 0000 h_0
+"0000011011111111", # 1111 h_1
+"0000011010011111", # 1100 h_2
+"0000001010111111", # 0101 h_3
+"0000000010111111", # 0001 4
+"0000000011011111", # 0010 5
+"0000001010011111", # 0100 6 #not min? '0000000010011111'
+"0000001011011111", # 0110 7 0000011010011111
+"0000001011111111", # 0111 8 ??
+"0000010010011111", # 1000 9 0000000010011111  00 00 h_0
+"0000010010111111", # 1001 10 0000011010011111  h_2
+"0000010011011111", # 1010 11 0000011010011111  h_2
+"0000010011111111", # 1011 12 ??
+"0000011010111111", # 1101 13 0000011011111111  h_1
+"0000011011011111"] # 1110 14 0000011011111111  h_1
+
+
+abcd = ["0000","0001","0010","0111","1011","1100","1111"]
+def freeze(R): return (frozenset(R[0]),frozenset(R[1]))
+print("Hello")
+h[2] in genPrcl(h[3],2,2,2)[0]
+</py-script>
