@@ -23,9 +23,25 @@
 <p>Then in the <code>&lt;body&gt;</code>, include TikZ code such as</p>
 
 <pre><code class="html language-html">&lt;script type="text/tikz"&gt;
-  \begin{tikzpicture}
-    \draw (0,0) circle (1in);
-  \end{tikzpicture}
+\begin{figure}
+    \centering
+\begin{tikzpicture}
+\node at (0,-.5)[n]{$O_4$};
+\node(1) at (0,3){};
+\node(h) at (0,2.5){} edge (1);
+\node(f) at (1,2){} edge (1);
+\node(e) at (0,2){} edge (h);
+\node(d) at(-1,2){} edge (1);
+\node(c) at (1,1){} edge (e) edge (f);
+\node(b) at (0,1){} edge (d) edge (f);
+\node(a) at(-1,1)[label=left:$y$]{} edge (d) edge (e);
+\node(g) at (0,.5)[label=right:$x$]{} edge (b);
+\node(0) at (0,0){} edge (a) edge (g) edge (c);
+\node at (0,-1)[n]{};
+\end{tikzpicture}
+    \caption{$\mathbf O_4$}
+    \label{fig:O4}
+\end{figure}
 &lt;/script&gt;
 </code></pre>
 
