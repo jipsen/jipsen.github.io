@@ -23,8 +23,6 @@
 <p>Then in the <code>&lt;body&gt;</code>, include TikZ code such as</p>
 
 <pre><code class="html language-html">&lt;script type="text/tikz"&gt;
-\begin{figure}
-    \centering
 \begin{tikzpicture}
 \node at (0,-.5)[n]{$O_4$};
 \node(1) at (0,3){};
@@ -39,9 +37,6 @@
 \node(0) at (0,0){} edge (a) edge (g) edge (c);
 \node at (0,-1)[n]{};
 \end{tikzpicture}
-    \caption{$\mathbf O_4$}
-    \label{fig:O4}
-\end{figure}
 &lt;/script&gt;
 </code></pre>
 
@@ -49,8 +44,6 @@
 replaced with the corresponding SVG.  For instance, the above code generates</p>  
 
 <script type="text/tikz">
-\begin{figure}
-    \centering
 \begin{tikzpicture}
 \node at (0,-.5)[n]{$O_4$};
 \node(1) at (0,3){};
@@ -65,9 +58,6 @@ replaced with the corresponding SVG.  For instance, the above code generates</p>
 \node(0) at (0,0){} edge (a) edge (g) edge (c);
 \node at (0,-1)[n]{};
 \end{tikzpicture}
-    \caption{$\mathbf O_4$}
-    \label{fig:O4}
-\end{figure}
 </script>
 
 <h2 id="howdoesthiswork">How does this work?</h2>
