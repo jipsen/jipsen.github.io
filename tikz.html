@@ -24,6 +24,7 @@
 
 <pre><code class="html language-html">&lt;script type="text/tikz"&gt;
 \begin{tikzpicture}
+\tikzstyle{every node} = [draw, fill=white, circle, inner sep=0pt, minimum size=5pt]
 \tikzstyle{n} = [draw=none, rectangle, inner sep=2pt] %name style
 \node at (0,-.5)[n]{$O_4$};
 \node(1) at (0,3){};
@@ -46,6 +47,7 @@ replaced with the corresponding SVG.  For instance, the above code generates</p>
 
 <script type="text/tikz">
 \begin{tikzpicture}
+\tikzstyle{every node} = [draw, fill=white, circle, inner sep=0pt, minimum size=5pt]
 \tikzstyle{n} = [draw=none, rectangle, inner sep=2pt] %name style
 \node at (0,-.5)[n]{$O_4$};
 \node(1) at (0,3){};
