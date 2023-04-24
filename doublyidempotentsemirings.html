@@ -1,0 +1,28 @@
+<html>
+<head>
+</head>
+<body>
+<h1>Multiplicatively and additively idempotent semirings</h1>
+
+<div id="insert"></div>
+<script src="ua1.1.js"></script>
+<script>
+init(function(n,auts) {
+    var al = find_joinsemilattices(n,true);
+    var i, bl = [], cl = [], j=0, f;
+    for (i in al)
+        bl = bl.concat(find_algebras(al[i],[apply_idempotence],[check_left_distributivity,check_right_distributivity,check_associativity],'cdot',auts))
+    for (i=0; i<bl.length; i++) {
+      f = bl[i].op['cdot'];
+      if (f.some(function(r){for (var k in r) if (r[k]!=k) return false; return true})) {
+        bl[i].index = j;
+        cl[j] = bl[i];
+        j++;
+      }
+    }
+    return cl
+},
+     "MAIdSrng",4)
+</script>
+</body>
+</html>
