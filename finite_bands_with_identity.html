@@ -5,9 +5,13 @@
 <h1>Bands with identity (semigroups with an idempotent binary operation and an identity element)</h1>
 </p>
 <div id="insert"></div>
-<script src="http://math.chapman.edu/~jipsen/structures/ua.js"></script>
+<script src="http://math.chapman.edu/~jipsen/structures/ua1.js"></script>
 <script>
-init("BandI",5,{idempotent:true,associative:true,identity:true})
+init(function(n,symbol,auts) {
+       return find_algebras(n,[apply_identity_0],
+                            [check_associativity],
+                            symbol,auts);},
+     "BandI",4)
 </script>
 </body>
 </html>
